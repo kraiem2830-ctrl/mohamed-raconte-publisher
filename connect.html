@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Connecter un compte TikTok — Mohamed Raconte Publisher</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body><main>
+<h1>Connecter un compte TikTok</h1>
+<div class="card">
+<p>1. Dans TikTok (navigateur ou appli), connecte-toi au compte à relier.<br>2. Colle la <strong>Client key</strong> de l'appli (developers.tiktok.com › ton appli), puis clique « Autoriser ».<br>3. Après « Autoriser » sur TikTok, la page de retour affiche un code à coller dans GitHub › Actions › Réglages › tiktok (avec le bon compte).</p>
+<p><label>Client key <input id="k" placeholder="awxxxxxxxxxxxxxx" size="28"></label></p>
+<p><button id="b">Autoriser sur TikTok</button></p>
+<p class="muted">Adresse de retour utilisée : <code id="r"></code></p>
+</div>
+<script>
+  // Construit l'adresse d'autorisation TikTok (Login Kit) ; rien n'est envoyé ailleurs que chez TikTok.
+  const redirect = location.origin + location.pathname.replace(/connect\.html$/, "callback.html");
+  document.getElementById("r").textContent = redirect;
+  const k = document.getElementById("k");
+  try { k.value = localStorage.getItem("tt_client_key") || ""; } catch (e) {}
+  document.getElementById("b").onclick = () => {
+    const key = k.value.trim();
+    if (!key) return k.focus();
+    try { localStorage.setItem("tt_client_key", key); } catch (e) {}
+    const q = new URLSearchParams({ client_key: key, scope: "user.info.basic,video.publish,video.upload", response_type: "code",
+                                    redirect_uri: redirect, state: Math.random().toString(36).slice(2) });
+    location.href = "https://www.tiktok.com/v2/auth/authorize/?" + q;
+  };
+</script>
+</main></body>
+</html>
