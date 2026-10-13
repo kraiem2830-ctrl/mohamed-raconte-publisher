@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Connexion TikTok — Mohamed Raconte Publisher</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body><main>
+<h1>Connexion TikTok</h1>
+<div class="card" id="box"><p>Lecture du code…</p></div>
+<script>
+  // Page de retour OAuth : affiche le code d'autorisation pour l'enregistrer dans GitHub (Actions › Réglages › tiktok).
+  // Le code n'est envoyé nulle part depuis cette page.
+  const q = new URLSearchParams(location.search), box = document.getElementById("box");
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  if (q.get("code")) {
+    const code = q.get("code");
+    box.innerHTML = `<p>✅ Autorisation reçue. Copie ce code (valable quelques minutes) :</p><p><code id="c">${esc(code)}</code></p><p><button id="b">Copier le code</button></p><p class="muted">Adresse de retour à indiquer : <code>${esc(location.origin + location.pathname)}</code></p>`;
+    document.getElementById("b").onclick = () => navigator.clipboard.writeText(code).then(() => (document.getElementById("b").textContent = "Copié ✓"));
+  } else {
+    box.innerHTML = `<p>❌ Pas de code reçu${q.get("error") ? " : " + esc(q.get("error") + " " + (q.get("error_description") || "")) : ""}.</p>`;
+  }
+</script>
+</main></body>
+</html>
