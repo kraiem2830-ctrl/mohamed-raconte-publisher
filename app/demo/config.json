@@ -1,0 +1,48 @@
+{
+ "tz": "Europe/Paris",
+ "tiktok_privacy": "PUBLIC_TO_EVERYONE",
+ "is_aigc": false,
+ "accounts": {
+  "islam": {
+   "name": "Mohamed raconte",
+   "tiktok": "@mohamed.raconte1",
+   "instagram": "@mohamed.raconte",
+   "videos": "../upload",
+   "instagram_enabled": true,
+   "tiktok_enabled": false
+  },
+  "mysteres": {
+   "name": "Dossiers Non Résolus",
+   "tiktok": "@dossiers.nonresolus",
+   "instagram": "",
+   "videos": "../../tiktok-niches/mysteres/upload",
+   "instagram_enabled": false,
+   "tiktok_enabled": false
+  },
+  "psychologie": {
+   "name": "Ton Cerveau Te Ment",
+   "tiktok": "@toncerveau.tement",
+   "instagram": "",
+   "videos": "../../tiktok-niches/psychologie/upload",
+   "instagram_enabled": false,
+   "tiktok_enabled": false
+  },
+  "argent": {
+   "name": "L'Argent Expliqué",
+   "tiktok": "@largent.explique",
+   "instagram": "",
+   "videos": "../../tiktok-niches/argent/upload",
+   "instagram_enabled": false,
+   "tiktok_enabled": false
+  },
+  "espace": {
+   "name": "Et Si… ?",
+   "tiktok": "@etsi.lunivers",
+   "instagram": "",
+   "videos": "../../tiktok-niches/espace/upload",
+   "instagram_enabled": false,
+   "tiktok_enabled": false
+  }
+ },
+ "_notes": "Un bloc par compte. tiktok_enabled passe à true quand TikTok a validé l'application et que le compte est connecté (Actions › Réglages › tiktok) ; avant validation, TikTok n'autorise que SELF_ONLY = privé. instagram_enabled passe à true quand le compte Instagram du bloc est connecté (secrets IG_TOKEN_<COMPTE> et IG_USER_ID_<COMPTE>). videos = dossier local des fichiers NN.mp4 + planning.json."
+}
