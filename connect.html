@@ -25,7 +25,7 @@
     if (!key) return k.focus();
     try { localStorage.setItem("tt_client_key", key); } catch (e) {}
     const q = new URLSearchParams({ client_key: key, scope: "user.info.basic,video.publish,video.upload", response_type: "code",
-                                    redirect_uri: redirect, state: Math.random().toString(36).slice(2) });
+                                    redirect_uri: redirect, state: Math.random().toString(36).slice(2), disable_auto_auth: "1" });
     location.href = "https://www.tiktok.com/v2/auth/authorize/?" + q;
   };
 </script>
