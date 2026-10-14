@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Mohamed Raconte Publisher — Calendrier</title>
+<link rel="icon" href="avatars/islam.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- Connexion : le jeton GitHub reste dans ce navigateur (localStorage), il n'est envoyé qu'à api.github.com -->
+<section id="login">
+  <div class="box">
+    <h1>Mohamed Raconte Publisher</h1>
+    <p class="muted">Programme et publie tes vidéos sur TikTok et Instagram. L'interface lit et écrit ton planning dans ton dépôt GitHub ; la publication tourne dans GitHub Actions, PC éteint.</p>
+    <p>Il faut un jeton GitHub <strong>fine-grained</strong> pour le dépôt <code id="login-repo"></code> :</p>
+    <ol>
+      <li>GitHub › Settings › Developer settings › <strong>Fine-grained tokens</strong> › Generate new token</li>
+      <li>Expiration : <em>No expiration</em> · Repository access : <em>Only select repositories</em> → <code>publisher</code></li>
+      <li>Permissions › Repository : <strong>Contents : Read and write</strong> et <strong>Actions : Read and write</strong></li>
+      <li>Colle le jeton ci-dessous (il n'est stocké que dans ce navigateur).</li>
+    </ol>
+    <div class="row">
+      <input id="token" type="password" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
+      <button class="btn primary" id="login-btn">Se connecter</button>
+    </div>
+    <div class="err" id="login-err"></div>
+    <p class="small muted">Ou <a href="?demo=1">voir une démonstration</a> sans jeton (données fictives, rien n'est envoyé).</p>
+  </div>
+</section>
+
+<div id="app" class="hidden">
+  <aside>
+    <div class="brand"><div class="logo">P</div><div>Publisher<span class="sub" id="brand-sub">Mohamed raconte</span></div></div>
+    <div class="side-actions">
+      <button class="btn primary" id="new-post">＋ Créer une publication</button>
+      <button class="btn" id="publish-now" title="Lance tout de suite le passage de publication (ce qui est arrivé à échéance)">▶ Publier maintenant</button>
+    </div>
+    <div class="side-title"><span>Canaux</span><button class="btn ghost sm" id="refresh" title="Recharger">↻</button></div>
+    <div class="channels" id="channels"></div>
+    <div class="side-foot">
+      <div class="run" id="last-run">Dernier passage : —</div>
+      <div><a id="actions-link" target="_blank" rel="noopener">GitHub Actions</a> · <a id="planning-link" target="_blank" rel="noopener">PLANNING.md</a></div>
+      <div><button class="btn ghost sm" id="logout">Changer de jeton</button></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <h1 id="view-title">Calendrier</h1>
+      <div class="seg">
+        <button id="prev" title="Précédent">‹</button>
+        <button id="today">Aujourd'hui</button>
+        <button id="next" title="Suivant">›</button>
+      </div>
+      <div class="range" id="range"></div>
+      <div class="spacer"></div>
+      <div class="seg" id="views">
+        <button data-view="week" class="active">Semaine</button>
+        <button data-view="month">Mois</button>
+        <button data-view="list">Liste</button>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </main>
+</div>
+
+<div id="modal-root"></div>
+<div id="toasts"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
